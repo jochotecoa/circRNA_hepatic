@@ -5,9 +5,9 @@ echo $tissue
 compound=$1 # "Epirubicin"
 compid=$2 # "Epi"  ## The abbreviated form of the compound name to write on all output names
 if [ $3 = "CONTROL" ]; then
-	CONTROL_SAMPLES="true"
+CONTROL_SAMPLES="true"
 else
-	CONTROL_SAMPLES="false"
+CONTROL_SAMPLES="false"
 fi
 
 echo $CONTROL_SAMPLES
@@ -23,9 +23,9 @@ inpfilpre=""  ## Prefix common to all input files (There are some compounds that
 maindir="/ngs-data/data/Juantxo_tools"
 inputdir="${compoundfolder}/TotalRNA/trimmed"    ## Directory where all raw data folders are located
 if [ "$compid"  ==  "DAU" ]; then
-	inputdir="${compoundfolder}/TotalRNA/trimmed"    ## Directory where all raw data folders are located
+inputdir="${compoundfolder}/TotalRNA/trimmed"    ## Directory where all raw data folders are located
 fi
-outputdir="/ngs-data/analysis/hecatos/juantxo/mRNA/quant_salmon/Homo_sapiens.GRCh38.cdna.ncrna.circbase/hepatic/${compound}"  ## Directory where all output data will be located
+outputdir="/share/analysis/hecatos/juantxo/mRNA/quant_salmon/Homo_sapiens.GRCh38.cdna.ncrna.circbase/hepatic/${compound}"  ## Directory where all output data will be located
 index="/share/data/hecatos/juantxo/circRNA/salmon_index"
 salmon="/home/jochoteco/miniconda3/bin/salmon"
 #####################################################################################################################
@@ -43,22 +43,24 @@ iDATE=$(date +%s)
 
 # Generate the sample names
 
+unset outnames
+
 for h in ${dose[@]}; do
-	if [ "$h"  ==  "Tox" ]; then
-		time=${timeTOX[@]}
-	else
-		time=${timeTHE[@]}
-	fi
-  for i in ${time[@]}; do
-		for j in ${replicates[@]}; do
-			if ${CONTROL_SAMPLES}; then
-				time=timeTHE
-				outnames+=("${inputdir}/${compid}_${i}_${j}");
-			else
-				outnames+=("${inputdir}/${compid}_${h}_${i}_${j}");
-			fi
-		done;
-	done;
+if [ "$h"  ==  "Tox" ]; then
+time=${timeTOX[@]}
+else
+time=${timeTHE[@]}
+fi
+for i in ${time[@]}; do
+for j in ${replicates[@]}; do
+if ${CONTROL_SAMPLES}; then
+time=timeTHE
+outnames+=("${inputdir}/${compid}_${i}_${j}");
+else
+outnames+=("${inputdir}/${compid}_${h}_${i}_${j}");
+fi
+done;
+done;
 done
 totnumsam=${#outnames[@]}
 namepos=0
@@ -70,29 +72,26 @@ DATE1=$(date +%s)
 for fn in ${outnames[@]};
 do
 
-	DATE1=$(date +%s)
-	samp=`basename ${fn}`
-	mkdir -p ${outputdir}/${samp}_quant
-	echo "-----------------------------------------"
-	echo "Processing sample ${samp}"
-	echo "-----------------------------------------"
-	${salmon} quant -i ${index} -l A \
-	         -1 ${fn}_R1_trimmed_PE.fastq.gz \
-	         -2 ${fn}_R2_trimmed_PE.fastq.gz \
-	         -p 24 -o ${outputdir}/${samp}_quant
+DATE1=$(date +%s)
+samp=`basename ${fn}`
+mkdir -p ${outputdir}/${samp}_quant
+echo "-----------------------------------------"
+echo "Processing sample ${samp}"
+echo "-----------------------------------------"
+${salmon} quant -i ${index} -l A -1 ${fn}_R1_trimmed_PE.fastq.gz -2 ${fn}_R2_trimmed_PE.fastq.gz -p 24 -o ${outputdir}/${samp}_quant
 
-	namepos=$(($namepos+1))
- 	DATEB=$(date +%s)
- 	sec=$(( $DATEB - $DATE1))
- 	h1=$(($sec/3600))
- 	m1=$((($sec-$h1*3600)/60))
- 	s1=$(($sec-$h1*3600-$m1*60))
- 	timeperfolder=$((($DATEB - $iDATE)/$namepos))
- 	remfol=$(($totnumsam - $namepos))
- 	remtime=$(($timeperfolder * $remfol))
- 	h2=$(($remtime/3600))
- 	m2=$((($remtime-$h2*3600)/60))
- 	s2=$(($remtime-$h2*3600-$m2*60))
- 	echo "${thiSample} took ${h1} hours, ${m1} minutes and ${s1} seconds   |  $(($namepos*100/$totnumsam))% completed     |  Time remaining: ${h2} hours, ${m2} minutes and ${s2} seconds";
+namepos=$(($namepos+1))
+DATEB=$(date +%s)
+sec=$(( $DATEB - $DATE1))
+h1=$(($sec/3600))
+m1=$((($sec-$h1*3600)/60))
+s1=$(($sec-$h1*3600-$m1*60))
+timeperfolder=$((($DATEB - $iDATE)/$namepos))
+remfol=$(($totnumsam - $namepos))
+remtime=$(($timeperfolder * $remfol))
+h2=$(($remtime/3600))
+m2=$((($remtime-$h2*3600)/60))
+s2=$(($remtime-$h2*3600-$m2*60))
+echo "${thiSample} took ${h1} hours, ${m1} minutes and ${s1} seconds   |  $(($namepos*100/$totnumsam))% completed     |  Time remaining: ${h2} hours, ${m2} minutes and ${s2} seconds";
 done
 

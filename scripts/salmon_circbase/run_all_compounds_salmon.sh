@@ -1,4 +1,4 @@
-bash ./salmon.sh Acetaminophen APA
+#bash ./salmon.sh Acetaminophen APA
 bash ./salmon.sh Azathioprine AZA
 bash ./salmon.sh Con_0.1_DMSO ConDMSO CONTROL
 bash ./salmon.sh Cyclosporin CYC

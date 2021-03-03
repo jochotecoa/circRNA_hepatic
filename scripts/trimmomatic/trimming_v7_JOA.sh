@@ -16,17 +16,17 @@ iDATE=$(date +%s)
 # PARAMETERS TO SET MANUALLY
 
 CONTROL_SAMPLES="false"   ## set to "true" or "false"
-compound="AZA"
+compound="DIC"
 tissue="Hepatic"       ## set to "Cardiac" or "Hepatic"
-compoundfolder="Azathioprine"
+compoundfolder="Diclofenac"
 ###############################
 ### Setting new samplenames ###
 ###############################
 
-timeTHE=("002" "008" "024" "072" "168" "240" "336") #"000" 
+timeTHE=("000") #"002" "008" "024" "072" "168" "240" "336")  
 timeTOX=("002" "008" "024" "072" "168" "240")
 # timeTOX=("000" "002" "008" "024" "072" "168" "240")
-dose=("The" "Tox")
+dose=("The") # "Tox")
 replicates=("1" "2" "3")
 reads=("R1" "R2")
 samplename=()
@@ -34,7 +34,7 @@ samplename=()
 ## Paths to directories
 maindir="/ngs-data/data/hecatos/${tissue}/${compoundfolder}/TotalRNA"
 inputdir="${maindir}/concatenated"
-outputdir="${maindir}/trimmed_reads3"
+outputdir="${maindir}/trimmed"
 trimmoversion="0.36"
 trimmo="/ngs-data/data/Juantxo_tools/Trimmomatic-${trimmoversion}"
 trimmomatic="$trimmo/trimmomatic-${trimmoversion}.jar"
@@ -73,6 +73,9 @@ cd ${inputdir}
 # 		done;
 # 	done;
 # else
+
+unset samplename
+
 for h in ${dose[@]}; do
 if [ "$h"  ==  "Tox" ]; then
 time=${timeTOX[@]}
