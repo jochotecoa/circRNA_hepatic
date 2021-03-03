@@ -25,7 +25,7 @@ inputdir="${compoundfolder}/TotalRNA/trimmed"    ## Directory where all raw data
 if [ "$compid"  ==  "DAU" ]; then
 	inputdir="${compoundfolder}/TotalRNA/trimmed"    ## Directory where all raw data folders are located
 fi
-outputdir="/ngs-data/analysis/hecatos/juantxo/mRNA/quant_salmon/Homo_sapiens.GRCh38.cdna.ncrna.circbase/${compound}"  ## Directory where all output data will be located
+outputdir="/ngs-data/analysis/hecatos/juantxo/mRNA/quant_salmon/Homo_sapiens.GRCh38.cdna.ncrna.circbase/hepatic/${compound}"  ## Directory where all output data will be located
 index="/share/data/hecatos/juantxo/circRNA/salmon_index"
 salmon="/home/jochoteco/miniconda3/bin/salmon"
 #####################################################################################################################
