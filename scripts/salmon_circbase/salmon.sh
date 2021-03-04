@@ -29,13 +29,13 @@ outputdir="/share/analysis/hecatos/juantxo/mRNA/quant_salmon/Homo_sapiens.GRCh38
 index="/share/data/hecatos/juantxo/circRNA/salmon_index"
 salmon="/home/jochoteco/miniconda3/bin/salmon"
 #####################################################################################################################
-replicates=("1" "2" "3")
-timeTHE=("000" "002" "008" "024" "072" "168" "240" "336") #"000" 
-timeTOX=("002" "008" "024" "072" "168" "240")
+# replicates=("1" "2" "3")
+# timeTHE=("000" "002" "008" "024" "072" "168" "240" "336") #"000" 
+# timeTOX=("002" "008" "024" "072" "168" "240")
 
 #timeTHE=("002" "008" "024" "072" "168" "240" "336")
 #timeTOX=("002" "008" "024" "072" "168" "240" "336")
-dose=("The" "Tox")
+# dose=("The" "Tox")
 #####################################################################################################################
 echo $compound
 #rm -r ${outputdir}/*
