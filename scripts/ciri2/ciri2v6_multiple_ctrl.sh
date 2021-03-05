@@ -7,13 +7,13 @@ CIRIASV1=$CIRIDIR/bin/CIRI_AS_v1.2/CIRI_AS_v1.2.pl
 indexgenome="false" # First time, true.
 GTFFTP=ftp://ftp.ensembl.org/pub/release-92/gtf/homo_sapiens/Homo_sapiens.GRCh38.92.gtf.gz
 GTF=${OUTPUTDIR}/Homo_sapiens.GRCh38.92.gtf
-compound="con_DF2"
+# compound="con_DF2"
 compoundfolder=""
-timeCTRL=("000" "002" "008" "024" "072" "168" "240" "336")
+# timeCTRL=("000" "002" "008" "024" "072" "168" "240" "336")
 #dose=("The")
 samplename=()
 reads=("R1" "R2")
-replicates=("1" "2" "3")
+# replicates=("1" "2" "3")
 
 mkdir $OUTPUTDIR
 cd $OUTPUTDIR
