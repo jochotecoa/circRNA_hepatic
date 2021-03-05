@@ -3,13 +3,13 @@ forceLibrary(c('dplyr', 'tibble'))
 
 maindir = '/share/analysis/hecatos/juantxo/mRNA/quant_salmon/Homo_sapiens.GRCh38.cdna.ncrna.circbase/hepatic/'
 
-output_dir = 'data/salmon_circBase/'
+output_dir = '/share/analysis/hecatos/juantxo/circRNA/salmon_circBase/'
 
 dir.create(output_dir, recursive = T)
 
 salmon_output_dir = '/share/analysis/hecatos/juantxo/mRNA/quant_salmon/Homo_sapiens.GRCh38.cdna.ncrna.circbase/hepatic/'
 
-salmon_output_compounds = list.dirs(path = salmon_output_dir, full.names = T)
+salmon_output_compounds = list.dirs(path = salmon_output_dir, full.names = T, recursive = F)
 
 for (sal_out_comp in salmon_output_compounds) {
   

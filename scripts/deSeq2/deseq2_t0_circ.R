@@ -60,8 +60,9 @@ stopifnot("No path for the input data specified"= exists('path_data'))
 setSizeFactorToOne = F # Default: FALSE
 filtering = T # Default: TRUE
 control_path = '/share/analysis/hecatos/juantxo/mRNA/quant_salmon/Homo_sapiens.GRCh38.cdna.ncrna.circbase/t0_controls/'
-input_folder = path_data = 'data/salmon_circBase/'
-method = path_data %>% strsplit(split = '/') %>% .[[1]] %>% .[2]
+input_folder = path_data = '/share/analysis/hecatos/juantxo/circRNA/salmon_circBase/'
+method = path_data %>% strsplit(split = '/') %>% .[[1]] 
+method = method[length(method)]
 comp = 'AZA'
 compid = 'azathioprine'
 doses = c('The', 'Tox')
@@ -75,14 +76,14 @@ doses = c('The', 'Tox')
 #   control = 'ConDMSO'
 # }
 
-control = 'T0_and_DF2'
+control = 'T0_and_conDMSO'
 
 
 # Control data cleaning ---------------------------------------------------
 
 
 
-quant_file = mergeFiles(path = control_path, files_patt = 'quant.sf', recursive = T, header = T)
+quant_file = readRDS(paste0(input_folder, 't0_controls.rds'))
 
 quant_file_counts = quant_file  %>% 
   column_to_rownames('Name') %>% 
@@ -90,7 +91,9 @@ quant_file_counts = quant_file  %>%
 # Clean colnames
 colnames(quant_file_counts) = colnames(quant_file_counts) %>% 
   gsub(pattern = '_quant/quant.sf', replacement = '') %>% 
-  gsub(pattern = '^.*\\/\\/', replacement = '')
+  gsub(pattern = '^.*\\/\\/', replacement = '') %>% 
+  gsub(pattern = 'NumReads_/', replacement = '')
+
 # Take away samples with low sequencing depth
 quant_file_counts = quant_file_counts %>% 
   dplyr::select(!matches('lowseqdepth'))

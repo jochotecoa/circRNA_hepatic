@@ -7,8 +7,8 @@ if (length(args)==0) {
 } 
 
 if (args[1] == 'circ' ) {
-  input_folder = path_data = 'data/salmon_circBase/'
-  script = 'scripts/deSeq2/deseq2_circ.R'
+  input_folder = path_data = '/share/analysis/hecatos/juantxo/circRNA/salmon_circBase/'
+  script = 'scripts/deSeq2/deseq2_t0_circ.R'
 }
 
 if (args[1] == 'gene') {
