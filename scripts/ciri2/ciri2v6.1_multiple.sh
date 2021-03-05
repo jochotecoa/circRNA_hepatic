@@ -10,12 +10,12 @@ GTF=/share/analysis/hecatos/juantxo/circRNA/ciri2/Homo_sapiens.GRCh38.92.gtf
 # compid="Epirubicin"
 # tissue="Hepatic"
 OUTPUTDIR=/share/analysis/hecatos/juantxo/circRNA/ciri2/${tissue}/${compound}
-timeTHE=("000" "002" "008" "024" "072" "168" "240" "336")
-timeTOX=("002" "008" "024" "072" "168" "240")
-dose=("The" "Tox")
+# timeTHE=("000" "002" "008" "024" "072" "168" "240" "336")
+# timeTOX=("002" "008" "024" "072" "168" "240")
+# dose=("The" "Tox")
 samplename=()
 reads=("R1" "R2")
-replicates=("1" "2" "3")
+# replicates=("1" "2" "3")
 
 
 mkdir -p $OUTPUTDIR

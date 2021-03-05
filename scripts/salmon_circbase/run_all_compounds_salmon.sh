@@ -14,6 +14,6 @@ replicates=("1" "2" "3")
 . ./salmon.sh Rifampicin RIF
 
 timeTHE=("000" "002" "008" "024" "072" "168" "240" "336")
-timeTOX=("002" "008" "024" "072" "168" "240")
+timeTOX=("000" "002" "008" "024" "072" "168" "240")
 
 . ./salmon.sh Valproic_Acid VPA
