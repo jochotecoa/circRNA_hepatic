@@ -37,8 +37,8 @@ for d in ${dose[@]}; do
 done;
 
 for rep in ${samplename[@]} ; do
-  FQR1=/share/data/hecatos/${tissue}/${compid}/TotalRNA/trimmed/${rep}_R1_trimmed_PE.fastq #
-  FQR2=/share/data/hecatos/${tissue}/${compid}/TotalRNA/trimmed/${rep}_R2_trimmed_PE.fastq
+  FQR1=/share/data/hecatos/juantxo/${tissue}/${compid}/TotalRNA/trimmed/${rep}_R1_trimmed_PE.fastq #
+  FQR2=/share/data/hecatos/juantxo/${tissue}/${compid}/TotalRNA/trimmed/${rep}_R2_trimmed_PE.fastq
   prefix="${compound}-pe-mantrimm-${rep}"
 
     gunzip ${FQR1}.gz
