@@ -3,7 +3,7 @@ timeTHE=("000" "002" "008" "024" "072" "168" "240" "336")
 timeTOX=("002" "008" "024" "072" "168" "240")
 replicates=("1" "2" "3")
 
-#. ./salmon.sh Acetaminophen APA
+# . ./salmon_APA.sh Acetaminophen APA
 . ./salmon.sh Azathioprine AZA
 . ./salmon.sh Con_0.1_DMSO ConDMSO CONTROL
 . ./salmon.sh Cyclosporin CYC

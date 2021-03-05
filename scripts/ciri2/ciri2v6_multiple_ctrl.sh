@@ -47,7 +47,7 @@ for rep in ${samplename[@]} ; do
   if $indexgenome; then
     $bwa index $genome
   fi
-  $bwa mem -T 19 $genome $FQR1 $FQR2 > ${prefix}_output/${prefix}.sam
+  $bwa mem -T 19 -t 12 $genome $FQR1 $FQR2 > ${prefix}_output/${prefix}.sam
   if [ "$(stat --printf="%s" ${prefix}_output/${prefix}.sam)" = 0 ] ; then
     echo "bwa mem failed"
     exit 1
@@ -58,12 +58,12 @@ for rep in ${samplename[@]} ; do
     exit 1
   fi
   perl $CIRIASV1 -S ${prefix}_output/${prefix}.sam -C ${prefix}_output/${prefix}.ciri -F $genome -A $GTF -O ${prefix}_output/${prefix} -D yes
-  java -jar ${CIRIDIR}/CIRI-full.jar RO1 -1 $FQR1 -2 $FQR2 -o ${prefix}_output/${prefix}
-  $bwa mem -T 19 $genome ${prefix}_output/${prefix}_ro1.fq > ${prefix}_output/${prefix}_ro1.sam
-  java -jar ${CIRIDIR}/CIRI-full.jar RO2 -r $genome -s ${prefix}_output/${prefix}_ro1.sam -l 100 -o ${prefix}_output/${prefix}
-  java -jar ${CIRIDIR}/CIRI-full.jar Merge -c ${prefix}_output/${prefix}.ciri -as ${prefix}_output/${prefix}_jav.list -ro ${prefix}_output/${prefix}_ro2_info.list -a $GTF -r $genome -o ${prefix}_output/${prefix}
+  # java -jar ${CIRIDIR}/CIRI-full.jar RO1 -1 $FQR1 -2 $FQR2 -o ${prefix}_output/${prefix}
+  # $bwa mem -T 19 $genome ${prefix}_output/${prefix}_ro1.fq > ${prefix}_output/${prefix}_ro1.sam
+  # java -jar ${CIRIDIR}/CIRI-full.jar RO2 -r $genome -s ${prefix}_output/${prefix}_ro1.sam -l 100 -o ${prefix}_output/${prefix}
+  # java -jar ${CIRIDIR}/CIRI-full.jar Merge -c ${prefix}_output/${prefix}.ciri -as ${prefix}_output/${prefix}_jav.list -ro ${prefix}_output/${prefix}_ro2_info.list -a $GTF -r $genome -o ${prefix}_output/${prefix}
   unset DISPLAY
-  java -jar ${CIRIDIR}/CIRI-vis.jar -i ${prefix}_output/${prefix}_merge_circRNA_detail.anno -l ${prefix}_output/${prefix}_library_length.list -r $genome -min 1
+  # java -jar ${CIRIDIR}/CIRI-vis.jar -i ${prefix}_output/${prefix}_merge_circRNA_detail.anno -l ${prefix}_output/${prefix}_library_length.list -r $genome -min 1
 
     gzip ${FQR1}
     gzip ${FQR2}

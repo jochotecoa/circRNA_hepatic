@@ -5,9 +5,9 @@ timeTOX=("002" "008" "024" "072" "168" "240")
 replicates=("1" "2" "3")
 
 
-# compound="AZA" #
-# compid="Azathioprine"
-# . ./scripts/ciri2/ciri2v6.1_multiple.sh
+compound="AZA" #
+compid="Azathioprine"
+. ./scripts/ciri2/ciri2v6.1_multiple.sh
 cd /share/script/hecatos/juantxo/circRNA_hepatic
 
 compound="CYC" #
@@ -40,7 +40,6 @@ compid="Rifampicin"
 . ./scripts/ciri2/ciri2v6.1_multiple.sh
 cd /share/script/hecatos/juantxo/circRNA_hepatic
 
-
 compound="VPA" #
 compid="Valproic_Acid"
 timeTHE=("000" "002" "008" "024" "072" "168" "240" "336")
@@ -53,7 +52,6 @@ compid="Con_0.1_DMSO"
 timeCTRL=("002" "008" "024" "072" "168" "240" "336")
 . ./scripts/ciri2/ciri2v6.1_multiple_ctrl.sh
 cd /share/script/hecatos/juantxo/circRNA_hepatic
-
 
 compound="APA" #
 compid="Acetaminophen"
