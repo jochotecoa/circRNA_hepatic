@@ -60,7 +60,7 @@ stopifnot("No path for the input data specified"= exists('path_data'))
 setSizeFactorToOne = F # Default: FALSE
 filtering = T # Default: TRUE
 control_path = '/share/analysis/hecatos/juantxo/mRNA/quant_salmon/Homo_sapiens.GRCh38.cdna.ncrna.circbase/t0_controls/'
-input_folder = path_data = '/share/analysis/hecatos/juantxo/circRNA/salmon_circBase/'
+# input_folder = path_data = '/share/analysis/hecatos/juantxo/circRNA/salmon_circBase/'
 method = path_data %>% strsplit(split = '/') %>% .[[1]] 
 method = method[length(method)]
 comp = 'AZA'

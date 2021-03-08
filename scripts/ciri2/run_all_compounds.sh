@@ -5,15 +5,15 @@ timeTOX=("002" "008" "024" "072" "168" "240")
 replicates=("1" "2" "3")
 
 
-compound="AZA" #
-compid="Azathioprine"
-. ./scripts/ciri2/ciri2v6.1_multiple.sh
-cd /share/script/hecatos/juantxo/circRNA_hepatic
-
-compound="CYC" #
-compid="Cyclosporin"
-. ./scripts/ciri2/ciri2v6.1_multiple.sh
-cd /share/script/hecatos/juantxo/circRNA_hepatic
+# compound="AZA" #
+# compid="Azathioprine"
+# . ./scripts/ciri2/ciri2v6.1_multiple.sh
+# cd /share/script/hecatos/juantxo/circRNA_hepatic
+# 
+# compound="CYC" #
+# compid="Cyclosporin"
+# . ./scripts/ciri2/ciri2v6.1_multiple.sh
+# cd /share/script/hecatos/juantxo/circRNA_hepatic
 
 compound="DIC" #
 compid="Diclofenac"
