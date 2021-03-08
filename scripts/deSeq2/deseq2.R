@@ -11,7 +11,7 @@ if (setSizeFactorToOne) {
 
 print(paste0('Running ', dose, ' dose of ', comp, ' against ', control))
 
-dds <- DESeq(dds)
+dds <- DESeq(dds, parallel = T)
 
 resultsNames(dds) # lists the coefficients
 
