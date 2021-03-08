@@ -29,6 +29,8 @@ compounds = compounds[!grepl('Con|con', compounds)] %>%
   gsub(pattern = '.miR.Counts.rds', replacement = '')
 
 
+
 for (comp in compounds) {
+  compid = comp
   source(file = script, local = T, echo = T)
 }

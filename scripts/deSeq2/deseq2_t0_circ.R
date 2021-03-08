@@ -63,8 +63,8 @@ control_path = '/share/analysis/hecatos/juantxo/mRNA/quant_salmon/Homo_sapiens.G
 # input_folder = path_data = '/share/analysis/hecatos/juantxo/circRNA/salmon_circBase/'
 method = path_data %>% strsplit(split = '/') %>% .[[1]] 
 method = method[length(method)]
-comp = 'AZA'
-compid = 'azathioprine'
+# comp = 'AZA'
+# compid = 'azathioprine'
 doses = c('The', 'Tox')
 
 # Analysis ----------------------------------------------------------------
