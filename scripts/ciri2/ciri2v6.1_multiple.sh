@@ -54,13 +54,17 @@ for rep in ${samplename[@]} ; do
   fi
   $bwa mem -T 19 -t 12 $genome $FQR1 $FQR2 > ${prefix}_output/${prefix}.sam
   if [ "$(stat --printf="%s" ${prefix}_output/${prefix}.sam)" = 0 ] ; then
-    echo "bwa mem failed" > ${prefix}_output/error_bwa.log
-    exit 1
+    zcat ${FQR1}.gz
+    zcat ${FQR2}.gz
+      if [ "$(stat --printf="%s" ${prefix}_output/${prefix}.sam)" = 0 ] ; then
+        echo "bwa mem failed" > ${prefix}_output/error_bwa.log
+        continue
+      fi
   fi
   perl $CIRI2 -I ${prefix}_output/${prefix}.sam -O ${prefix}_output/${prefix}.ciri -F $genome -A $GTF -T 12
   if [ "$(stat --printf="%s" ${prefix}_output/${prefix}.ciri)" = 0 ] ; then
     echo "ciri2 failed" > ${prefix}_output/error_ciri2.log
-    exit 1
+    continue
   fi
   perl $CIRIASV1 -S ${prefix}_output/${prefix}.sam -C ${prefix}_output/${prefix}.ciri -F $genome -A $GTF -O ${prefix}_output/${prefix} -D yes
   # java -jar ${CIRIDIR}/CIRI-full.jar RO1 -1 $FQR1 -2 $FQR2 -o ${prefix}_output/${prefix}
