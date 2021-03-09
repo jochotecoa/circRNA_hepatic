@@ -41,8 +41,8 @@ for rep in ${samplename[@]} ; do
   FQR2=/ngs-data/data/hecatos/${tissue}/${compid}/TotalRNA/trimmed/${rep}_R2_trimmed_PE.fastq
   prefix="${compound}-pe-mantrimm-${rep}"
 
-    gunzip ${FQR1}.gz
-    gunzip ${FQR2}.gz
+    zcat ${FQR1}.gz > ${FQR1}
+    zcat ${FQR2}.gz > ${FQR2}
 
 
   #rm -r ${prefix}_output
@@ -58,7 +58,7 @@ for rep in ${samplename[@]} ; do
     zcat ${FQR2}.gz > ${FQR2}
       if [ "$(stat --printf="%s" ${prefix}_output/${prefix}.sam)" = 0 ] ; then
         echo "bwa mem failed" > ${prefix}_output/error_bwa.log
-        continue
+        exit 1
       fi
   fi
   perl $CIRI2 -I ${prefix}_output/${prefix}.sam -O ${prefix}_output/${prefix}.ciri -F $genome -A $GTF -T 12
@@ -78,7 +78,15 @@ for rep in ${samplename[@]} ; do
     gzip ${FQR1}
     gzip ${FQR2}
   fi
+  
+    if [ "$(stat --printf="%s" ${FQR2}.gz)" = 0 ] ; then
+    gzip ${FQR1}
+    gzip ${FQR2}
+  fi
 
+
+rm ${FQR1}
+rm ${FQR2}
 
 done
 
