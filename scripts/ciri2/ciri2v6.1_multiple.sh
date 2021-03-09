@@ -54,8 +54,8 @@ for rep in ${samplename[@]} ; do
   fi
   $bwa mem -T 19 -t 12 $genome $FQR1 $FQR2 > ${prefix}_output/${prefix}.sam
   if [ "$(stat --printf="%s" ${prefix}_output/${prefix}.sam)" = 0 ] ; then
-    zcat ${FQR1}.gz
-    zcat ${FQR2}.gz
+    zcat ${FQR1}.gz > ${FQR1}
+    zcat ${FQR2}.gz > ${FQR2}
       if [ "$(stat --printf="%s" ${prefix}_output/${prefix}.sam)" = 0 ] ; then
         echo "bwa mem failed" > ${prefix}_output/error_bwa.log
         continue
@@ -73,10 +73,11 @@ for rep in ${samplename[@]} ; do
   # java -jar ${CIRIDIR}/CIRI-full.jar Merge -c ${prefix}_output/${prefix}.ciri -as ${prefix}_output/${prefix}_jav.list -ro ${prefix}_output/${prefix}_ro2_info.list -a $GTF -r $genome -o ${prefix}_output/${prefix}
   unset DISPLAY
   # java -jar ${CIRIDIR}/CIRI-vis.jar -i ${prefix}_output/${prefix}_merge_circRNA_detail.anno -l ${prefix}_output/${prefix}_library_length.list -r $genome -min 1
-
+  
+  if [ "$(stat --printf="%s" ${FQR1}.gz)" = 0 ] ; then
     gzip ${FQR1}
     gzip ${FQR2}
-
+  fi
 
 
 done
