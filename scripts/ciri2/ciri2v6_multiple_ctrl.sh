@@ -1,7 +1,7 @@
 bwa=/share/tools-Juantxo/bwa-0.7.17/bwa
 genome=/share/tools-Juantxo/genome/Homo_sapiens.GRCh38.dna.primary_assembly.fa
 CIRIDIR=/share/tools-Juantxo/circRNA/CIRI-full_v2.0
-OUTPUTDIR=/share/analysis/hecatos/juantxo/circRNA/ciri2/con_DF2
+OUTPUTDIR=/share/analysis/hecatos/juantxo/circRNA/ciri2/${tissue}/${compound}
 CIRI2=$CIRIDIR/bin/CIRI_v2.0.6/CIRI2.pl
 CIRIASV1=$CIRIDIR/bin/CIRI_AS_v1.2/CIRI_AS_v1.2.pl
 indexgenome="false" # First time, true.
@@ -34,14 +34,14 @@ gunzip ${GTF}.gz
 #done;
 
 for rep in ${samplename[@]} ; do
-  FQR1=/ngs-data/data/hecatos/Cardiac/Con_Flu_DMSO_Gal/TotalRNA/trimmed_reads/${rep}_R1_trimmed_PE.fastq
-  FQR2=/ngs-data/data/hecatos/Cardiac/Con_Flu_DMSO_Gal/TotalRNA/trimmed_reads/${rep}_R2_trimmed_PE.fastq
+  FQR1=/ngs-data/data/hecatos/${tissue}/${compid}/TotalRNA/${trimmed_dir}/${rep}_R1_trimmed_PE.fastq
+  FQR2=/ngs-data/data/hecatos/${tissue}/${compid}/TotalRNA/${trimmed_dir}/${rep}_R2_trimmed_PE.fastq
   prefix="df2-pe-trimmed-${rep}"
 
   gunzip ${FQR1}.gz
   gunzip ${FQR2}.gz
 
-  rm -r ${prefix}_output
+  # rm -r ${prefix}_output
   mkdir ${prefix}_output
 
   if $indexgenome; then
