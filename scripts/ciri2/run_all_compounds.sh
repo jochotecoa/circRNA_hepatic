@@ -1,5 +1,7 @@
 tissue="Hepatic"
 
+replicates=("1" "2" "3")
+
 # compound="AZA" #
 # compid="Azathioprine"
 # . ./scripts/ciri2/ciri2v6.1_multiple.sh
@@ -41,32 +43,32 @@ tissue="Hepatic"
 # cd /share/script/hecatos/juantxo/circRNA_hepatic
 # 
 
+# dose=("Tox")
+# timeTOX=("000")
+# replicates=("1" "2" "3")
+# 
+# compound="CYC" #
+# compid="Cyclosporin"
+# . ./scripts/ciri2/ciri2v6.1_multiple.sh
+# cd /share/script/hecatos/juantxo/circRNA_hepatic
+# 
+# compound="ISO" #
+# compid="Isoniazid"
+# . ./scripts/ciri2/ciri2v6.1_multiple.sh
+# cd /share/script/hecatos/juantxo/circRNA_hepatic
+# 
+# dose=("The" "Tox")
+# timeTHE=("008" "024" "072" "168" "240" "336")
+# timeTOX=("002" "008" "024" "072" "168" "240")
+# 
+# compound="PHE" #
+# compid="Phenytoin"
+# . ./scripts/ciri2/ciri2v6.1_multiple.sh
+# cd /share/script/hecatos/juantxo/circRNA_hepatic
+
 dose=("Tox")
-timeTOX=("000")
-replicates=("1" "2" "3")
-
-compound="CYC" #
-compid="Cyclosporin"
-. ./scripts/ciri2/ciri2v6.1_multiple.sh
-cd /share/script/hecatos/juantxo/circRNA_hepatic
-
-compound="ISO" #
-compid="Isoniazid"
-. ./scripts/ciri2/ciri2v6.1_multiple.sh
-cd /share/script/hecatos/juantxo/circRNA_hepatic
-
-dose=("The" "Tox")
-timeTHE=("008" "024" "072" "168" "240" "336")
-timeTOX=("002" "008" "024" "072" "168" "240")
-
-compound="PHE" #
-compid="Phenytoin"
-. ./scripts/ciri2/ciri2v6.1_multiple.sh
-cd /share/script/hecatos/juantxo/circRNA_hepatic
-
-dose=("The" "Tox")
-timeTHE=("000" "002" "008" "024" "072" "168" "240" "336")
-timeTOX=("002" "008" "024" "072" "168" "240")
+# timeTHE=("000" "002" "008" "024" "072" "168" "240" "336")
+timeTOX=("168" "240")
 
 compound="RIF" #
 compid="Rifampicin"
