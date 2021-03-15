@@ -66,15 +66,16 @@ replicates=("1" "2" "3")
 # . ./scripts/ciri2/ciri2v6.1_multiple.sh
 # cd /share/script/hecatos/juantxo/circRNA_hepatic
 
-dose=("Tox")
+# dose=("Tox")
 # timeTHE=("000" "002" "008" "024" "072" "168" "240" "336")
-timeTOX=("168" "240")
+# timeTOX=("168" "240")
+# 
+# compound="RIF" #
+# compid="Rifampicin"
+# . ./scripts/ciri2/ciri2v6.1_multiple.sh
+# cd /share/script/hecatos/juantxo/circRNA_hepatic
 
-compound="RIF" #
-compid="Rifampicin"
-. ./scripts/ciri2/ciri2v6.1_multiple.sh
-cd /share/script/hecatos/juantxo/circRNA_hepatic
-
+dose=("The")
 compound="VPA" #
 compid="Valproic_Acid"
 timeTHE=("000" "002" "008" "024" "072" "168" "240" "336")

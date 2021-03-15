@@ -34,8 +34,8 @@ gunzip ${GTF}.gz
 #done;
 
 for rep in ${samplename[@]} ; do
-  FQR1=/ngs-data/data/hecatos/${tissue}/${compid}/TotalRNA/${trimmed_dir}/${rep}_R1_trimmed_PE.fastq
-  FQR2=/ngs-data/data/hecatos/${tissue}/${compid}/TotalRNA/${trimmed_dir}/${rep}_R2_trimmed_PE.fastq
+  FQR1=/ngs-data/data/hecatos/${tissue}/${compid}/TotalRNA/${trimmed_dir}/${rep}_R1_2_trimmed.fastq
+  FQR2=/ngs-data/data/hecatos/${tissue}/${compid}/TotalRNA/${trimmed_dir}/${rep}_R2_2_trimmed.fastq
   prefix="df2-pe-trimmed-${rep}"
 
   gunzip ${FQR1}.gz
