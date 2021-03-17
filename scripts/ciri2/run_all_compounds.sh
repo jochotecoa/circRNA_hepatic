@@ -75,24 +75,24 @@ replicates=("1" "2" "3")
 # . ./scripts/ciri2/ciri2v6.1_multiple.sh
 # cd /share/script/hecatos/juantxo/circRNA_hepatic
 
-dose=("The")
-compound="VPA" #
-compid="Valproic_Acid"
-timeTHE=("000" "002" "008" "024" "072" "168" "240" "336")
-timeTOX=("000" "002" "008" "024" "072" "168" "240")
-. ./scripts/ciri2/ciri2v6.1_multiple.sh
-cd /share/script/hecatos/juantxo/circRNA_hepatic
+# dose=("The")
+# compound="VPA" #
+# compid="Valproic_Acid"
+# timeTHE=("000" "002" "008" "024" "072" "168" "240" "336")
+# timeTOX=("000" "002" "008" "024" "072" "168" "240")
+# . ./scripts/ciri2/ciri2v6.1_multiple.sh
+# cd /share/script/hecatos/juantxo/circRNA_hepatic
+# 
+# 
+# timeCTRL=("002" "008" "024" "072" "168" "240" "336")
+# trimmed_dir="trimmed"
+# 
+# compound="ConDMSO" #
+# compid="Con_0.1_DMSO"
+# . ./scripts/ciri2/ciri2v6_multiple_ctrl.sh
+# cd /share/script/hecatos/juantxo/circRNA_hepatic
 
-
-timeCTRL=("002" "008" "024" "072" "168" "240" "336")
-trimmed_dir="trimmed"
-
-compound="ConDMSO" #
-compid="Con_0.1_DMSO"
-. ./scripts/ciri2/ciri2v6_multiple_ctrl.sh
-cd /share/script/hecatos/juantxo/circRNA_hepatic
-
-dose=("The" "Tox")
+dose=("Tox")
 timeTHE=("000" "002" "008" "024" "072" "168" "240" "336")
 timeTOX=("002" "008" "024" "072" "168" "240")
 
