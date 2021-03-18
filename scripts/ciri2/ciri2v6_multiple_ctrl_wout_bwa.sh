@@ -17,8 +17,8 @@ reads=("R1" "R2")
 
 mkdir $OUTPUTDIR
 cd $OUTPUTDIR
-wget $GTFFTP
-gunzip ${GTF}.gz
+# wget $GTFFTP
+# gunzip ${GTF}.gz
 
 #for d in ${dose[@]}; do
 #  if [ "$d"  ==  "Tox" ]; then
