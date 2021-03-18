@@ -84,20 +84,20 @@ replicates=("1" "2" "3")
 # cd /share/script/hecatos/juantxo/circRNA_hepatic
 # 
 # 
-# timeCTRL=("002" "008" "024" "072" "168" "240" "336")
-# trimmed_dir="trimmed"
+timeCTRL=("002" "008" "024" "072" "168" "240" "336")
+trimmed_dir="trimmed"
+
+compound="ConDMSO" #
+compid="Con_0.1_DMSO"
+. ./scripts/ciri2/ciri2v6_multiple_ctrl_wout_bwa.sh
+cd /share/script/hecatos/juantxo/circRNA_hepatic
+
+# dose=("Tox")
+# timeTHE=("000" "002" "008" "024" "072" "168" "240" "336")
+# timeTOX=("002" "008" "024" "072" "168" "240")
 # 
-# compound="ConDMSO" #
-# compid="Con_0.1_DMSO"
-# . ./scripts/ciri2/ciri2v6_multiple_ctrl.sh
-# cd /share/script/hecatos/juantxo/circRNA_hepatic
-
-dose=("Tox")
-timeTHE=("000" "002" "008" "024" "072" "168" "240" "336")
-timeTOX=("002" "008" "024" "072" "168" "240")
-
-
-compound="APA" #
-compid="Acetaminophen"
-. ./scripts/ciri2/ciri2v6.1_APA.sh
+# 
+# compound="APA" #
+# compid="Acetaminophen"
+# . ./scripts/ciri2/ciri2v6.1_APA.sh
 
