@@ -22,9 +22,9 @@ inpfilpre=""  ## Prefix common to all input files (There are some compounds that
 #inputdir="/ngs-data/data/hecatos/hiseq_data/Total_RNA/${tissue}/${compoundfolder}/raw_files/"
 # trimmed="trimmmed"
 maindir="/ngs-data/data/Juantxo_tools"
-inputdir="${compoundfolder}/TotalRNA/${trimmed}"    ## Directory where all raw data folders are located
+inputdir="${compoundfolder}/TotalRNA/${trimmed_dir}"    ## Directory where all raw data folders are located
 if [ "$compid"  ==  "DAU" ]; then
-inputdir="${compoundfolder}/TotalRNA/${trimmed}"    ## Directory where all raw data folders are located
+inputdir="${compoundfolder}/TotalRNA/${trimmed_dir}"    ## Directory where all raw data folders are located
 fi
 outputdir="/share/analysis/hecatos/juantxo/mRNA/quant_salmon/Homo_sapiens.GRCh38.cdna.ncrna.circbase/hepatic/${compound}"  ## Directory where all output data will be located
 index="/share/data/hecatos/juantxo/circRNA/salmon_index"
