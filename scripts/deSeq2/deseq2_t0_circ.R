@@ -83,22 +83,22 @@ control = 'T0_and_conDMSO'
 
 
 
-quant_file = readRDS(paste0(input_folder, 't0_controls.rds'))
+quant_file_ctrl = readRDS(paste0(input_folder, 't0_controls.rds'))
 
-quant_file_counts = quant_file  %>% 
+quant_file_ctrl_counts = quant_file_ctrl  %>% 
   column_to_rownames('Name') %>% 
   dplyr::select(contains('NumReads'))
 # Clean colnames
-colnames(quant_file_counts) = colnames(quant_file_counts) %>% 
+colnames(quant_file_ctrl_counts) = colnames(quant_file_ctrl_counts) %>% 
   gsub(pattern = '_quant/quant.sf', replacement = '') %>% 
   gsub(pattern = '^.*\\/\\/', replacement = '') %>% 
   gsub(pattern = 'NumReads_/', replacement = '')
 
 # Take away samples with low sequencing depth
-quant_file_counts = quant_file_counts %>% 
+quant_file_ctrl_counts = quant_file_ctrl_counts %>% 
   dplyr::select(!matches('lowseqdepth'))
 # DESeq2 needs round numbers
-cts_control = apply(quant_file_counts, 2, round) %>% as.data.frame()
+cts_control = apply(quant_file_ctrl_counts, 2, round) %>% as.data.frame()
 
 cts_control = cts_control %>% 
   rmDuplicatedColumns() %>% 

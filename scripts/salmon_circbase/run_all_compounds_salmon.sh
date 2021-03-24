@@ -1,19 +1,25 @@
-dose=("The" "Tox")
+trimmed_dir = "trimmed_reads"
+# dose=("The" "Tox")
+
 timeTHE=("000" "002" "008" "024" "072" "168" "240" "336")
 timeTOX=("002" "008" "024" "072" "168" "240")
+
 replicates=("1" "2" "3")
 
 # . ./salmon_APA.sh Acetaminophen APA
-. ./salmon.sh Azathioprine AZA
-. ./salmon.sh Con_0.1_DMSO ConDMSO CONTROL
-. ./salmon.sh Cyclosporin CYC
-. ./salmon.sh Diclofenac DIC
-. ./salmon.sh Isoniazid ISO
-. ./salmon.sh Methotrexate MTX
-. ./salmon.sh Phenytoin PHE
-. ./salmon.sh Rifampicin RIF
+# . ./salmon.sh Azathioprine AZA
+# . ./salmon.sh Con_0.1_DMSO ConDMSO CONTROL
+. ./salmon.sh Con_UNTR ConUNTR CONTROL
 
-timeTHE=("000" "002" "008" "024" "072" "168" "240" "336")
-timeTOX=("000" "002" "008" "024" "072" "168" "240")
 
-. ./salmon.sh Valproic_Acid VPA
+# . ./salmon.sh Cyclosporin CYC
+# . ./salmon.sh Diclofenac DIC
+# . ./salmon.sh Isoniazid ISO
+# . ./salmon.sh Methotrexate MTX
+# . ./salmon.sh Phenytoin PHE
+# . ./salmon.sh Rifampicin RIF
+# 
+# timeTHE=("000" "002" "008" "024" "072" "168" "240" "336")
+# timeTOX=("000" "002" "008" "024" "072" "168" "240")
+# 
+# . ./salmon.sh Valproic_Acid VPA
