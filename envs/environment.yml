@@ -1,0 +1,18 @@
+name: circrna-pipeline
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - r-base=4.2.0
+  - r-deseq2
+  - r-dplyr
+  - bioconductor-biomart
+  - r-yaml
+  - r-here
+  - yq
+  - trimmomatic
+  - salmon
+  - bwa
+  - samtools
+  # Note: CIRI2 might need specific installation steps or a separate environment

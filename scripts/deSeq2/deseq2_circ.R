@@ -3,7 +3,7 @@
 
 source('scripts/functions/functions_JOA.R')
 forceLibrary(c('biomaRt', "tximport", "dplyr", "DESeq2", "grid", "ggplot2", 
-               "pheatmap", "BiocParallel"))
+               "pheatmap", "BiocParallel", "yaml")) # Added 'yaml' library
 register(MulticoreParam(20))
 getCts <- function(path, comp) {
   quant_file = list.files(path = path, pattern = comp, full.names = T) %>% 
@@ -50,6 +50,28 @@ rmDuplicatedColumns <- function(df) {
   return(df)
 }
 
+# --- Configuration Loading ---
+# This script expects 'config.yaml' to be in the project root directory (two levels up).
+# Adjust path if running from a different location.
+# In an RStudio environment, rstudioapi::getSourceEditorContext()$path might be useful.
+# For Rscript execution, consider passing PROJECT_BASE_DIR as an argument or setting an environment variable.
+# For this example, we assume Rscript is run from the project root or the current working directory is the project root.
+project_root <- here::here() # Using 'here' package for robust pathing
+
+config_file <- file.path(project_root, "config.yaml")
+
+if (!file.exists(config_file)) {
+  stop(paste0("Configuration file '", config_file, "' not found. ",
+              "Please copy 'config.yaml.template' to 'config.yaml' and configure it."))
+}
+
+config <- yaml::read_yaml(config_file)
+
+# Extract DESeq2 settings
+deseq2_settings <- config$DESEQ2_SETTINGS
+control_sample_names <- deseq2_settings$CONTROL_SAMPLE_NAMES
+
+
 # Input data --------------------------------------------------------------
 
 stopifnot("No compound specified"= exists('comp'))
@@ -64,10 +86,12 @@ filtering = T # Default: TRUE
 # Analysis ----------------------------------------------------------------
 
 
-if (grepl('DAU|DOX|EPI|IDA|CONDMSO', toupper(comp))) {
-  control = 'con_DF2'
+# Dynamically set control based on compound and configuration
+comp_upper <- toupper(comp)
+if (comp_upper %in% names(control_sample_names)) {
+  control <- control_sample_names[[comp_upper]]
 } else {
-  control = 'ConDMSO'
+  control <- control_sample_names$DEFAULT
 }
 
 cts_control = getCts(path = path_data, comp = control) %>% 

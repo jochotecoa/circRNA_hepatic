@@ -27,3 +27,11 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 GEMINI.md
+
+# Bioinformatics standard ignore patterns
+data/
+results/
+logs/
+*.log
+.env
+config.yaml

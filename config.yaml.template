@@ -1,0 +1,57 @@
+# config.yaml.template
+
+# This file serves as a template for `config.yaml`.
+# Copy this file to `config.yaml` and modify the paths and parameters as needed for your environment.
+# Note: `config.yaml` should be added to .gitignore if not already present.
+
+# --- General Project Settings ---
+PROJECT_NAME: "circRNA_hepatic"
+
+# --- Directory Paths ---
+# Base directory for the project. If left empty, assumes the current working directory.
+PROJECT_BASE_DIR: "/path/to/your/circRNA_hepatic_project"
+
+# Base directory for raw data storage, typically where FASTQ files are located.
+# This often points to a shared storage mount point.
+BASE_DATA_STORAGE_DIR: "/ngs-data/data" # Example: /ngs-data/data/hecatos/
+
+# Output Paths (relative to PROJECT_BASE_DIR)
+RESULTS_DIR: "${PROJECT_BASE_DIR}/results"
+LOGS_DIR: "${PROJECT_BASE_DIR}/logs"
+
+# Reference Data Paths
+# Adapt these paths to your system's location for reference genomes, indices, etc.
+GENOME_FASTA: "/path/to/reference/genome.fa"
+GENOME_GTF: "/path/to/reference/genome.gtf"
+SALMON_INDEX: "/path/to/salmon/index"
+# Add other reference paths as needed, e.g., CIRI2 annotations, known circRNA databases
+CIRI2_ANNOTATION_FILE: "/path/to/ciri2/annotation.txt" # Example
+
+# --- Tool Specific Parameters ---
+# Trimmomatic settings
+TRIMMOMATIC_JAR: "/path/to/Trimmomatic/trimmomatic-0.39.jar" # Example version
+TRIMMOMATIC_ADAPTERS: "/path/to/Trimmomatic/adapters/TruSeq3-PE.fa"
+# fastqQC parameters
+FASTQC_PATH: "/path/to/FastQC/fastqc" # Path to the fastqc executable
+# Add other Trimmomatic parameters (e.g., MINLEN, HEADCROP, etc.)
+
+# CIRI2 settings
+# Add CIRI2 specific parameters here if they need to be configurable
+
+# Salmon settings
+# Add Salmon specific parameters here (e.g., library type)
+
+# DESeq2 settings
+DESEQ2_SETTINGS:
+  CONTROL_SAMPLE_NAMES:
+    DAU: "con_DF2"
+    DOX: "con_DF2"
+    EPI: "con_DF2"
+    IDA: "con_DF2"
+    CONDMSO: "con_DF2"
+    DEFAULT: "ConDMSO" # Default if compound not in the list
+# Add other DESeq2 parameters (e.g., alpha, fitType)
+
+# --- Other Parameters ---
+# Example: Number of threads to use for tools supporting multi-threading
+THREADS: 8

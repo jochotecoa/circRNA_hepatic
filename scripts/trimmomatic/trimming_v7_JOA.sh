@@ -1,19 +1,41 @@
+set -euo pipefail
+
 #######################################################################
 ### Quality control and trimming of reads (paired end & single end) ###
 #######################################################################
 
-## programs needed:
-#export PATH=$PATH:/ngs-data/tools/FastQC_v0.11.4/
-#export PATH=$PATH:/ngs-data/tools/Trimmomatic-0.33/
-#source ~/.bash_profile
+# --- Configuration Loading ---
+# This script expects 'config.yaml' to be in the project root directory.
+CONFIG_FILE="../../config.yaml"
 
+if [ ! -f "$CONFIG_FILE" ]; then
+    echo "Error: Configuration file '$CONFIG_FILE' not found." >&2
+    echo "Please copy 'config.yaml.template' to 'config.yaml' and configure it." >&2
+    exit 1
+fi
 
+# Load parameters from config.yaml using yq
+# Ensure yq is installed (e.g., via conda: conda install -c conda-forge yq)
+PROJECT_BASE_DIR=$(yq '.PROJECT_BASE_DIR' "$CONFIG_FILE")
+BASE_DATA_STORAGE_DIR=$(yq '.BASE_DATA_STORAGE_DIR' "$CONFIG_FILE")
+RESULTS_DIR=$(yq '.RESULTS_DIR' "$CONFIG_FILE")
+LOGS_DIR=$(yq '.LOGS_DIR' "$CONFIG_FILE")
+TRIMMOMATIC_JAR=$(yq '.TRIMMOMATIC_JAR' "$CONFIG_FILE")
+TRIMMOMATIC_ADAPTERS=$(yq '.TRIMMOMATIC_ADAPTERS' "$CONFIG_FILE")
+FASTQC_PATH=$(yq '.FASTQC_PATH' "$CONFIG_FILE")
+
+# Check if yq command was successful
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to parse config.yaml. Make sure yq is installed and config.yaml is valid." >&2
+    exit 1
+fi
+
+# --- Script Start ---
 iDATE=$(date +%s)
 
-
 ###################################################################################################
 ###################################################################################################
-# PARAMETERS TO SET MANUALLY
+# PARAMETERS TO SET MANUALLY (consider moving to config.yaml if they are static)
 
 CONTROL_SAMPLES="false"   ## set to "true" or "false"
 compound="DIC"
@@ -31,20 +53,22 @@ replicates=("1" "2" "3")
 reads=("R1" "R2")
 samplename=()
 
-## Paths to directories
-maindir="/ngs-data/data/hecatos/${tissue}/${compoundfolder}/TotalRNA"
+## Paths to directories - now derived from config.yaml
+maindir="${BASE_DATA_STORAGE_DIR}/hecatos/${tissue}/${compoundfolder}/TotalRNA"
 inputdir="${maindir}/concatenated"
 outputdir="${maindir}/trimmed"
-trimmoversion="0.36"
-trimmo="/ngs-data/data/Juantxo_tools/Trimmomatic-${trimmoversion}"
-trimmomatic="$trimmo/trimmomatic-${trimmoversion}.jar"
-## Trimmomatic parameters
+
+# Trimmomatic tool path from config.yaml
+trimmomatic="$TRIMMOMATIC_JAR"
+trimmo_adapters_path="$TRIMMOMATIC_ADAPTERS" # Path to adapters, used in ILLUMINACLIP
+
+## Trimmomatic parameters (can also be moved to config.yaml)
 trimlog="false"    ## set to "true" if a trimlog is desired for each trimmomatic run (additional output file)
 unpaired="false"    ## set to "true" if unpaired reads from the paired end filtering are desired (additional output file)
 singleend='false'
 ## fastqQC parameters
 fastqQC="false"    ## set to "true" or "false"
-perlsoft="/ngs-data/data/Juantxo_tools/FastQC/fastqc"
+perlsoft="$FASTQC_PATH"
 
 ###################################################################################################
 outputdirFQR="${outputdir}/fastQC_raw"
@@ -126,7 +150,7 @@ PE -threads 12 -phred33 -trimlog ${trimlogdir}/trimlog_${thiSample}.txt \
 ${inputdir}/${thiSample}_R1.fastq.gz ${inputdir}/${thiSample}_R2.fastq.gz  \
 ${outputdir}/${thiSample}_R1_trimmed_PE.fastq.gz ${unpaireDir}/${thiSample}_R1_unpaired.fastq.gz \
 ${outputdir}/${thiSample}_R2_trimmed_PE.fastq.gz ${unpaireDir}/${thiSample}_R2_unpaired.fastq.gz \
-ILLUMINACLIP:$trimmo/adapters/TruSeq3-PE.fa:2:30:10 \
+ILLUMINACLIP:$trimmo_adapters_path:2:30:10 \
 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36 HEADCROP:12
 
 if ${singleend}; then
@@ -134,14 +158,14 @@ java -Xms2G -Xmx3G -jar $trimmomatic \
 SE -threads 12 -phred33 -trimlog ${trimlogdir}/trimlog_${thiSample}.txt \
 ${inputdir}/${thiSample}_R1.fastq.gz   \
 ${outputdir}/${thiSample}_R1_trimmed_SE.fastq.gz \
-ILLUMINACLIP:$trimmo/adapters/TruSeq3-PE.fa:2:30:10 \
+ILLUMINACLIP:$trimmo_adapters_path:2:30:10 \
 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36 HEADCROP:12
 
 java -Xms2G -Xmx3G -jar $trimmomatic \
 SE -threads 12 -phred33 -trimlog ${trimlogdir}/trimlog_${thiSample}.txt \
 ${inputdir}/${thiSample}_R2.fastq.gz  \
 ${outputdir}/${thiSample}_R2_trimmed_SE.fastq.gz \
-ILLUMINACLIP:$trimmo/adapters/TruSeq3-PE.fa:2:30:10 \
+ILLUMINACLIP:$trimmo_adapters_path:2:30:10 \
 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36 HEADCROP:12
 fi
 
